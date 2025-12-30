@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTS Store | Официальные альбомы BTS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BTS_logo_%282017%29.png/200px-BTS_logo_%282017%29.png" alt="BTS Logo" class="logo-img">
+                    <span class="logo-text">OFFICIAL STORE</span>
+                </div>
+                <nav class="nav">
+                    <button id="cart-toggle" class="cart-toggle">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="cart-text">Корзина</span>
+                        <span class="cart-badge" id="cart-count">0</span>
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1 class="hero-title">ОФИЦИАЛЬНЫЕ АЛЬБОМЫ BTS</h1>
+                    <p class="hero-subtitle">Коллекционные издания, фотокарточки и эксклюзивные товары</p>
+                </div>
+                <div class="hero-image">
+                    <div class="members-grid">
+                        <div class="member">RM</div>
+                        <div class="member">Jin</div>
+                        <div class="member">SUGA</div>
+                        <div class="member">j-hope</div>
+                        <div class="member">Jimin</div>
+                        <div class="member">V</div>
+                        <div class="member">Jung Kook</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="products">
+                <h2 class="section-title">
+                    <i class="fas fa-compact-disc"></i> КОЛЛЕКЦИЯ АЛЬБОМОВ
+                </h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Все</button>
+                    <button class="filter-btn" data-filter="korean">Корейские</button>
+                    <button class="filter-btn" data-filter="japanese">Японские</button>
+                    <button class="filter-btn" data-filter="single">Синглы</button>
+                </div>
+                <div class="products-grid" id="products-grid">
+                    <!-- Альбомы будут добавлены через JS -->
+                </div>
+            </section>
+
+            <aside class="cart-sidebar" id="cart-sidebar">
+                <div class="cart-header">
+                    <h2><i class="fas fa-shopping-bag"></i> Ваша корзина</h2>
+                    <button class="close-cart" id="close-cart">&times;</button>
+                </div>
+                <div class="cart-items" id="cart-items">
+                    <p class="empty-cart">
+                        <i class="fas fa-shopping-bag"></i><br>
+                        Ваша корзина пуста
+                    </p>
+                </div>
+                <div class="cart-footer">
+                    <div class="cart-summary">
+                        <div class="cart-total">
+                            <span>Общая стоимость:</span>
+                            <span id="total-price">0 ₩</span>
+                        </div>
+                        <div class="cart-shipping">
+                            <span>Доставка:</span>
+                            <span id="shipping-price">Бесплатно</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-order" id="checkout-btn">
+                        <i class="fas fa-credit-card"></i> Оформить заказ
+                    </button>
+                    <p class="cart-note">* Бесплатная доставка при заказе от 50,000 ₩</p>
+                </div>
+            </aside>
+
+            <div class="overlay" id="overlay"></div>
+        </div>
+    </main>
+
+    <!-- Модальное окно оформления заказа -->
+    <div class="modal" id="order-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-ticket-alt"></i> Оформление заказа</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <form id="order-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">Имя *</label>
+                        <input type="text" id="first-name" name="first-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Фамилия *</label>
+                        <input type="text" id="last-name" name="last-name" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Телефон *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="+7 (999) 999-99-99">
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Адрес доставки *</label>
+                    <textarea id="address" name="address" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="member">Любимый участник BTS</label>
+                    <select id="member" name="member">
+                        <option value="">Выберите участника</option>
+                        <option value="RM">RM</option>
+                        <option value="Jin">Jin</option>
+                        <option value="SUGA">SUGA</option>
+                        <option value="j-hope">j-hope</option>
+                        <option value="Jimin">Jimin</option>
+                        <option value="V">V</option>
+                        <option value="Jung Kook">Jung Kook</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" required>
+                        <span>Я согласен с условиями покупки и политикой конфиденциальности</span>
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-paper-plane"></i> Подтвердить заказ
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Сообщение об успешном заказе -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <div>
+                <h3>Заказ создан!</h3>
+                <p>Спасибо за покупку! Вы получите подтверждение на email.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/BTS_logo_%282017%29.png/100px-BTS_logo_%282017%29.png" alt="BTS Logo">
+                    <p>Официальный магазин BTS</p>
+                </div>
+                <div class="footer-info">
+                    <p>© 2024 BTS OFFICIAL STORE. Все права защищены.</p>
+                    <p>Это демонстрационный сайт для учебных целей</p>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-weibo"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/cart.js"></script>
+    <script src="js/order.js"></script>
+</body>
+</html>
