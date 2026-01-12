@@ -715,3 +715,30 @@ body {
         margin: 10px;
     }
 }
+/* Стили для отладки */
+.debug {
+    border: 1px solid red !important;
+}
+
+.cart-item {
+    transition: all 0.3s ease;
+}
+
+.cart-item:hover {
+    background-color: rgba(112, 39, 195, 0.05);
+}
+
+/* Убедитесь, что корзина отображается правильно */
+#cart-items {
+    min-height: 100px;
+}
+
+.empty-cart-message {
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--gray-color);
+    font-size: 1.1rem;
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    margin: 20px 0;
+}
