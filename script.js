@@ -1,4 +1,3 @@
-// Данные товаров с PNG изображениями
 const products = [
     {
         id: 1,
@@ -58,63 +57,46 @@ const products = [
     }
 ];
 
-// Корзина
-let cart = JSON.parse(localStorage.getItem('bts_cart')) || [];
+let cart = JSON.parse(localStorage.getItem('bts_cart')) || []; //корзина
 
-// Инициализация при загрузке страницы
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() { //инициализация при загрузке страницы
     console.log('BTS Album Store загружен!');
+    updateCartUI(); // Обновление интерфейса корзины
+    document.getElementById('order-id').textContent = Math.floor(1000 + Math.random() * 9000); // Генерация ID заказа
     
-    // Обновление интерфейса корзины
-    updateCartUI();
-    
-    // Генерация ID заказа
-    document.getElementById('order-id').textContent = Math.floor(1000 + Math.random() * 9000);
-    
-    // Установка даты доставки
-    const deliveryDate = new Date();
+    const deliveryDate = new Date(); // Установка даты доставки
     deliveryDate.setDate(deliveryDate.getDate() + 7);
     document.getElementById('delivery-date').textContent = deliveryDate.toLocaleDateString('ru-RU', {
         day: 'numeric',
         month: 'long'
     });
-    
-    // Настройка обработчиков событий
-    setupEventListeners();
+    setupEventListeners(); // Настройка обработчиков событий
 });
 
-// Обновление интерфейса корзины
-function updateCartUI() {
+function updateCartUI() { // Обновление интерфейса корзины
     const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
     const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     
-    // Обновление счетчиков
-    document.getElementById('cart-count').textContent = totalCount;
+    document.getElementById('cart-count').textContent = totalCount; // Обновление счетчиков
     document.getElementById('cart-total').textContent = totalPrice.toLocaleString('ru-RU') + ' ₽';
     document.getElementById('cart-summary-total').textContent = totalPrice.toLocaleString('ru-RU') + ' ₽';
     
-    // Обновление кнопки оформления
-    const checkoutBtn = document.getElementById('checkout-btn');
+    const checkoutBtn = document.getElementById('checkout-btn'); // Обновление кнопки оформления
     checkoutBtn.disabled = totalCount === 0;
     
-    // Обновление содержимого корзины
-    const cartItemsContainer = document.getElementById('cart-items');
+    const cartItemsContainer = document.getElementById('cart-items'); // Обновление содержимого корзины
     const emptyCartMessage = document.getElementById('empty-cart-message');
-    
     if (cart.length === 0) {
         emptyCartMessage.style.display = 'block';
         cartItemsContainer.innerHTML = '';
         return;
     }
-    
     emptyCartMessage.style.display = 'none';
     
-    // Создание HTML для товаров в корзине
-    let cartHTML = '';
+    let cartHTML = ''; // Создание HTML для товаров в корзине
     cart.forEach(item => {
         const product = products.find(p => p.id === item.id);
         const itemTotal = item.price * item.quantity;
-        
         cartHTML += `
             <div class="cart-item" data-id="${item.id}">
                 <div class="cart-item-image">
@@ -138,11 +120,10 @@ function updateCartUI() {
             </div>
         `;
     });
-    
     cartItemsContainer.innerHTML = cartHTML;
     
-    // Добавление обработчиков для элементов корзины
-    document.querySelectorAll('.decrease').forEach(btn => {
+    
+    document.querySelectorAll('.decrease').forEach(btn => { // Добавление обработчиков для элементов корзины
         btn.addEventListener('click', function() {
             const id = parseInt(this.dataset.id);
             updateCartItem(id, -1);
