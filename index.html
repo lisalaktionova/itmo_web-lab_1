@@ -3,291 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BTS Official Store | Альбомы и мерч</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <title>BTS Album Store | Магазин альбомов BTS</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💜</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💜</text></svg>">
 </head>
 <body>
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <div class="logo-icon">💜</div>
-                    <div class="logo-text">
-                        <h1>BTS STORE</h1>
-                        <p>Официальные альбомы</p>
-                    </div>
+                    <h1><i class="fas fa-record-vinyl"></i> BTS Album Store</h1>
+                    <p class="subtitle">Официальные альбомы Bangtan Sonyeondan</p>
                 </div>
-                <nav class="nav">
-                    <button class="cart-btn" id="cartBtn">
-                        <i class="fas fa-shopping-bag"></i>
-                        <span class="cart-text">Корзина</span>
-                        <span class="cart-count" id="cartCount">0</span>
+                <div class="cart-info">
+                    <button id="cart-toggle" class="cart-button">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count">0</span>
+                        <span id="cart-total">0 ₽</span>
                     </button>
-                </nav>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="main">
         <div class="container">
-            <!-- Hero Section -->
-            <section class="hero">
-                <div class="hero-content">
-                    <h2 class="hero-title">ОФИЦИАЛЬНЫЕ АЛЬБОМЫ <span class="highlight">BTS</span></h2>
-                    <p class="hero-subtitle">Коллекционные издания, эксклюзивные фотокарточки и лимитированные товары</p>
-                    <div class="members">
-                        <div class="member-tag">RM</div>
-                        <div class="member-tag">Jin</div>
-                        <div class="member-tag">SUGA</div>
-                        <div class="member-tag">j-hope</div>
-                        <div class="member-tag">Jimin</div>
-                        <div class="member-tag">V</div>
-                        <div class="member-tag">Jung Kook</div>
+            <section class="intro">
+                <h2>Коллекция альбомов BTS</h2>
+                <p>Официальные альбомы, специальные издания и лимитированные версии от самой популярной к-поп группы в мире. Каждый альбом включает фотокарточки, постеры и уникальный контент.</p>
+            </section>
+
+            <section class="products">
+                <h2>Доступные альбомы</h2>
+                <div class="products-grid" id="products-grid">
+                    <!-- Товары будут загружены через JavaScript -->
+                </div>
+            </section>
+
+            <section class="cart-section">
+                <div class="cart-header">
+                    <h2><i class="fas fa-shopping-cart"></i> Корзина</h2>
+                    <button id="clear-cart" class="btn-secondary">Очистить корзину</button>
+                </div>
+                
+                <div class="cart-items" id="cart-items">
+                    <!-- Корзина будет загружена через JavaScript -->
+                    <p class="empty-cart-message" id="empty-cart-message">Ваша корзина пуста</p>
+                </div>
+                
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Итого:</span>
+                        <span id="cart-summary-total">0 ₽</span>
                     </div>
-                </div>
-            </section>
-
-            <!-- Filters -->
-            <section class="filters">
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-filter="all">
-                        <i class="fas fa-star"></i> Все альбомы
-                    </button>
-                    <button class="filter-btn" data-filter="korean">
-                        <i class="fas fa-globe-asia"></i> Корейские
-                    </button>
-                    <button class="filter-btn" data-filter="japanese">
-                        <i class="fas fa-flag"></i> Японские
-                    </button>
-                    <button class="filter-btn" data-filter="single">
-                        <i class="fas fa-music"></i> Синглы
-                    </button>
-                    <button class="filter-btn" data-filter="solo">
-                        <i class="fas fa-user"></i> Соло
+                    <button id="checkout-btn" class="btn-primary checkout-btn">
+                        <i class="fas fa-check-circle"></i> Оформить заказ
                     </button>
                 </div>
             </section>
 
-            <!-- Products Grid -->
-            <section class="products-section">
-                <h3 class="section-title">
-                    <i class="fas fa-compact-disc"></i> КОЛЛЕКЦИЯ АЛЬБОМОВ
-                </h3>
-                <div class="products-grid" id="productsGrid">
-                    <!-- Товары загружаются через JS -->
+            <section class="order-form-section" id="order-form-section">
+                <div class="order-form-container">
+                    <h2><i class="fas fa-truck"></i> Оформление заказа</h2>
+                    
+                    <form id="order-form" class="order-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="first-name">Имя *</label>
+                                <input type="text" id="first-name" name="first-name" required placeholder="Например: Дмитрий">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="last-name">Фамилия *</label>
+                                <input type="text" id="last-name" name="last-name" required placeholder="Например: Иванов">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="address">Адрес доставки *</label>
+                            <input type="text" id="address" name="address" required placeholder="Город, улица, дом, квартира">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Контактный телефон *</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="+7 (XXX) XXX-XX-XX">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email (опционально)</label>
+                            <input type="email" id="email" name="email" placeholder="your.email@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes">Примечания к заказу</label>
+                            <textarea id="notes" name="notes" rows="3" placeholder="Особые пожелания по доставке..."></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" id="cancel-order" class="btn-secondary">Отмена</button>
+                            <button type="submit" class="btn-primary">
+                                <i class="fas fa-paper-plane"></i> Создать заказ
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </section>
         </div>
     </main>
 
-    <!-- Cart Modal -->
-    <div class="modal" id="cartModal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content cart-modal">
-            <div class="modal-header">
-                <h3>
-                    <i class="fas fa-shopping-bag"></i>
-                    Ваша корзина
-                    <span class="cart-items-count">(<span id="cartItemsCount">0</span> товаров)</span>
-                </h3>
-                <button class="modal-close" id="closeCart">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="cart-items" id="cartItems">
-                    <div class="empty-cart">
-                        <i class="fas fa-shopping-bag"></i>
-                        <h4>Корзина пуста</h4>
-                        <p>Добавьте альбомы BTS в корзину</p>
-                    </div>
-                </div>
-                <div class="cart-summary">
-                    <div class="summary-row">
-                        <span>Товары:</span>
-                        <span id="subtotal">0 ₩</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Доставка:</span>
-                        <span id="shipping">Бесплатно</span>
-                    </div>
-                    <div class="summary-row total">
-                        <span>Итого:</span>
-                        <span id="total">0 ₩</span>
-                    </div>
-                </div>
-                <button class="checkout-btn" id="checkoutBtn">
-                    <i class="fas fa-credit-card"></i> Оформить заказ
-                </button>
-                <p class="shipping-note">
-                    <i class="fas fa-shipping-fast"></i>
-                    Бесплатная доставка при заказе от 50,000 ₩
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Order Modal -->
-    <div class="modal" id="orderModal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content order-modal">
-            <div class="modal-header">
-                <h3>
-                    <i class="fas fa-ticket-alt"></i>
-                    Оформление заказа
-                </h3>
-                <button class="modal-close" id="closeOrder">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="orderForm">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="firstName">
-                                <i class="fas fa-user"></i> Имя *
-                            </label>
-                            <input type="text" id="firstName" name="firstName" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">
-                                <i class="fas fa-user"></i> Фамилия *
-                            </label>
-                            <input type="text" id="lastName" name="lastName" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">
-                            <i class="fas fa-envelope"></i> Email *
-                        </label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone">
-                            <i class="fas fa-phone"></i> Телефон *
-                        </label>
-                        <input type="tel" id="phone" name="phone" required placeholder="+7 (999) 999-99-99">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="address">
-                            <i class="fas fa-map-marker-alt"></i> Адрес доставки *
-                        </label>
-                        <textarea id="address" name="address" rows="3" required></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="favoriteMember">
-                            <i class="fas fa-heart"></i> Любимый участник BTS
-                        </label>
-                        <select id="favoriteMember" name="favoriteMember">
-                            <option value="">Выберите участника</option>
-                            <option value="RM">RM</option>
-                            <option value="Jin">Jin</option>
-                            <option value="SUGA">SUGA</option>
-                            <option value="j-hope">j-hope</option>
-                            <option value="Jimin">Jimin</option>
-                            <option value="V">V</option>
-                            <option value="Jung Kook">Jung Kook</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group checkbox-group">
-                        <label class="checkbox">
-                            <input type="checkbox" id="agreeTerms" required>
-                            <span class="checkmark"></span>
-                            Я согласен с условиями покупки и политикой конфиденциальности
-                        </label>
-                    </div>
-                    
-                    <button type="submit" class="submit-btn">
-                        <i class="fas fa-paper-plane"></i> Подтвердить заказ
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Notification -->
-    <div class="notification" id="notification">
-        <div class="notification-content">
-            <div class="notification-icon">
-                <i class="fas fa-check-circle"></i>
-            </div>
-            <div class="notification-text">
-                <h4>Заказ создан! 💜</h4>
-                <p>Спасибо за покупку! Вы получите подтверждение на email.</p>
-                <p class="order-number">Номер заказа: <span id="orderNumber">BT0001</span></p>
-            </div>
-            <button class="notification-close" id="closeNotification">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-    </div>
-
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <div class="footer-logo">
-                        <span class="footer-icon">💜</span>
-                        <div>
-                            <h3>BTS OFFICIAL STORE</h3>
-                            <p>Официальный магазин BTS</p>
-                        </div>
-                    </div>
-                    <p class="footer-description">
-                        Этот сайт создан для демонстрации учебного проекта.<br>
-                        Все товары и изображения являются собственностью HYBE и Big Hit Music.
-                    </p>
+                    <h3>BTS Album Store</h3>
+                    <p>Официальный магазин альбомов BTS в России</p>
+                    <p class="copyright">© 2023 Все права защищены. ARMY 💜</p>
                 </div>
-                
                 <div class="footer-section">
-                    <h4>Информация</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Условия использования</a></li>
-                        <li><a href="#">Политика конфиденциальности</a></li>
-                        <li><a href="#">Контакты</a></li>
-                    </ul>
+                    <h3>Контакты</h3>
+                    <p><i class="fas fa-envelope"></i> support@bts-store.ru</p>
+                    <p><i class="fas fa-phone"></i> +7 (800) 555-35-35</p>
                 </div>
-                
                 <div class="footer-section">
-                    <h4>Следите за нами</h4>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-weverse"></i></a>
+                    <h3>Мы в соцсетях</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i> VK</a>
+                        <a href="#"><i class="fab fa-telegram"></i> Telegram</a>
+                        <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
                     </div>
-                    <p class="copyright">
-                        © 2024 BTS OFFICIAL STORE<br>
-                        Все права защищены
-                    </p>
                 </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>
-                    <i class="fas fa-code"></i>
-                    Лабораторная работа по веб-разработке | Создано с 💜 для ARMY
-                </p>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="js/data.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/modal.js"></script>
-    <script src="js/main.js"></script>
+    <div id="order-success-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-check-circle success-icon"></i> Заказ создан!</h2>
+                <button id="close-modal" class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Спасибо за ваш заказ! Мы свяжемся с вами в ближайшее время для подтверждения.</p>
+                <p>Номер вашего заказа: <strong>BTS-<span id="order-id">0000</span></strong></p>
+                <p>Ожидаемая дата доставки: <strong id="delivery-date">через 5-7 дней</strong></p>
+                <div class="bts-quote">
+                    <p>"You gave me the best of me, so you'll give you the best of you"</p>
+                    <p class="quote-author">- BTS, Magic Shop</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="continue-shopping" class="btn-primary">Продолжить покупки</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
