@@ -5,56 +5,64 @@ const products = [
         title: "BE (Deluxe Edition)",
         price: 3499,
         description: "Альбом 2020 года, отражающий чувства BTS во время пандемии. Включает фотокарточки, постер и журнал.",
-        icon: "🎵"
+        icon: "🎵",
+        color: "#8338ec"
     },
     {
         id: 2,
         title: "Map of the Soul: 7",
         price: 4299,
         description: "Четвертый студийный альбом BTS. Версия 4 включает 2 CD, фотокнигу, фотокарточки и дополнительные материалы.",
-        icon: "🧭"
+        icon: "🧭",
+        color: "#3a86ff"
     },
     {
         id: 3,
         title: "Love Yourself 結 'Answer'",
         price: 3899,
         description: "Компиляционный альбом, завершающий серию Love Yourself. Содержит все синглы трилогии.",
-        icon: "💖"
+        icon: "💖",
+        color: "#ff006e"
     },
     {
         id: 4,
         title: "Dynamite (Single)",
         price: 1999,
         description: "Первая полностью англоязычная песня BTS. Физический сингл включает фото-карточки и постер.",
-        icon: "💥"
+        icon: "💥",
+        color: "#ffbe0b"
     },
     {
         id: 5,
         title: "Proof (Anthology)",
         price: 5999,
         description: "Антология, охватывающая 9-летнюю карьеру группы. Коллекционное издание с 3 CD.",
-        icon: "📀"
+        icon: "📀",
+        color: "#fb5607"
     },
     {
         id: 6,
         title: "Butter (Single)",
         price: 2199,
         description: "Второй англоязычный сингл BTS. Лимитированное издание с эксклюзивным контентом.",
-        icon: "🧈"
+        icon: "🧈",
+        color: "#ff006e"
     },
     {
         id: 7,
         title: "Wings (You Never Walk Alone)",
         price: 3599,
         description: "Переиздание второго студийного альбома Wings. Включает три новые песни.",
-        icon: "🪽"
+        icon: "🪽",
+        color: "#06d6a0"
     },
     {
         id: 8,
         title: "The Most Beautiful Moment in Life: Young Forever",
         price: 3199,
         description: "Компиляционный альбом серии The Most Beautiful Moment in Life. Специальное издание.",
-        icon: "🌅"
+        icon: "🌅",
+        color: "#118ab2"
     }
 ];
 
@@ -109,14 +117,14 @@ function renderProducts() {
         productCard.className = 'product-card';
         
         productCard.innerHTML = `
-            <div class="product-image">
+            <div class="product-image" style="background-color: ${product.color}20; color: ${product.color}">
                 <span>${product.icon}</span>
             </div>
             <div class="product-info">
                 <h3 class="product-title">${product.title}</h3>
                 <p class="product-description">${product.description}</p>
                 <div class="product-price">${product.price.toLocaleString('ru-RU')} ₽</div>
-                <button class="btn-primary add-to-cart" data-id="${product.id}">
+                <button class="btn-primary add-to-cart" data-id="${product.id}" style="background-color: ${product.color}">
                     <i class="fas fa-cart-plus"></i> Добавить в корзину
                 </button>
             </div>
@@ -141,7 +149,8 @@ function addToCart(productId) {
             title: product.title,
             price: product.price,
             quantity: 1,
-            icon: product.icon
+            icon: product.icon,
+            color: product.color
         });
     }
     
@@ -152,13 +161,15 @@ function addToCart(productId) {
     // Анимация добавления в корзину
     const button = document.querySelector(`.add-to-cart[data-id="${productId}"]`);
     const originalHTML = button.innerHTML;
+    const originalColor = button.style.backgroundColor;
+    
     button.innerHTML = '<i class="fas fa-check"></i> Добавлено!';
-    button.style.backgroundColor = 'var(--success-color)';
+    button.style.backgroundColor = '#38b000';
     button.disabled = true;
     
     setTimeout(() => {
         button.innerHTML = originalHTML;
-        button.style.backgroundColor = '';
+        button.style.backgroundColor = originalColor;
         button.disabled = false;
     }, 1500);
 }
@@ -210,7 +221,7 @@ function renderCart() {
         const itemTotal = item.price * item.quantity;
         
         cartItem.innerHTML = `
-            <div class="cart-item-image">
+            <div class="cart-item-image" style="background-color: ${item.color}20; color: ${item.color}">
                 <span>${item.icon}</span>
             </div>
             <div class="cart-item-details">
@@ -304,19 +315,26 @@ function setupEventListeners() {
     
     // Очистка корзины
     clearCartBtn.addEventListener('click', () => {
-        if (cart.length === 0) return;
+        if (cart.length === 0) {
+            alert('Корзина уже пуста!');
+            return;
+        }
         
         if (confirm('Вы уверены, что хотите очистить корзину?')) {
             cart = [];
             saveCart();
             renderCart();
             updateCartSummary();
+            alert('Корзина очищена!');
         }
     });
     
     // Открытие формы заказа
-    checkoutBtn.addEventListener('click', () => {
-        if (cart.length === 0) return;
+    checkoutBtn.addEventListener('click', (e) => {
+        if (cart.length === 0) {
+            alert('Добавьте товары в корзину перед оформлением заказа!');
+            return;
+        }
         orderFormSection.style.display = 'block';
         orderFormSection.scrollIntoView({ behavior: 'smooth' });
     });
@@ -337,7 +355,13 @@ function setupEventListeners() {
         const phone = document.getElementById('phone').value.trim();
         
         if (!firstName || !lastName || !address || !phone) {
-            alert('Пожалуйста, заполните все обязательные поля');
+            alert('Пожалуйста, заполните все обязательные поля (отмечены *)');
+            return;
+        }
+        
+        // Проверка номера телефона
+        if (!isValidPhone(phone)) {
+            alert('Пожалуйста, введите корректный номер телефона');
             return;
         }
         
@@ -345,6 +369,7 @@ function setupEventListeners() {
         orderSuccessModal.style.display = 'flex';
         
         // Очистить корзину после оформления заказа
+        const orderItems = [...cart]; // Сохраняем копию для возможного лога
         cart = [];
         saveCart();
         renderCart();
@@ -355,6 +380,16 @@ function setupEventListeners() {
         
         // Сброс формы
         orderForm.reset();
+        
+        // Вывод информации в консоль (для отладки)
+        console.log('Заказ оформлен:', {
+            orderId: `BTS-${orderIdElement.textContent}`,
+            customer: `${firstName} ${lastName}`,
+            address: address,
+            phone: phone,
+            items: orderItems,
+            total: orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+        });
     });
     
     // Закрытие модального окна
@@ -380,6 +415,12 @@ function setupEventListeners() {
             cartSection.scrollIntoView({ behavior: 'smooth' });
         }
     });
+}
+
+// Валидация телефона
+function isValidPhone(phone) {
+    const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+    return phoneRegex.test(phone);
 }
 
 // Инициализация корзины при загрузке страницы
