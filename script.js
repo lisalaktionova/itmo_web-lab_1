@@ -148,7 +148,7 @@ function updateCartUI() {
                 </div>
                 <div class="cart-item-details">
                     <div class="cart-item-title">${item.title}</div>
-                    <div class="cart-item-price">${item.price.toLocaleString('ru-RU')} ₽</div>
+                    <div class="cart-item-price">${item.price.toLocaleString('ru-RU')} ₽ × <span class="cart-item-quantity">${item.quantity}</span></div>
                 </div>
                 <div class="cart-item-controls">
                     <div class="quantity-control">
@@ -160,7 +160,7 @@ function updateCartUI() {
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>
-                <div class="cart-item-total">${itemTotal.toLocaleString('ru-RU')} ₽</div>
+                <div class="cart-item-total" id="item-total-${item.id}">${itemTotal.toLocaleString('ru-RU')} ₽</div>
             </div>
         `;
     });
@@ -171,7 +171,58 @@ function updateCartUI() {
     setupCartItemEventListeners();
 }
 
-// Настройка обработчиков событий для элементов корзины
+// Обновление количества товара
+function updateCartItem(productId, change) {
+    const item = cart.find(item => item.id === productId);
+    if (item) {
+        item.quantity += change;
+        if (item.quantity < 1) {
+            removeFromCart(productId);
+        } else {
+            localStorage.setItem('bts_cart', JSON.stringify(cart));
+            updateCartUI();
+            // Обновляем только конкретный элемент вместо полного обновления UI
+            updateCartItemDisplay(productId);
+        }
+    }
+}
+
+// Обновление отображения одного товара в корзине
+function updateCartItemDisplay(productId) {
+    const item = cart.find(item => item.id === productId);
+    if (!item) return;
+    
+    const itemTotal = item.price * item.quantity;
+    const quantityElement = document.querySelector(`.cart-item[data-id="${productId}"] .cart-item-quantity`);
+    const totalElement = document.getElementById(`item-total-${productId}`);
+    const quantityInput = document.querySelector(`.quantity-input[data-id="${productId}"]`);
+    
+    if (quantityElement) quantityElement.textContent = item.quantity;
+    if (totalElement) totalElement.textContent = itemTotal.toLocaleString('ru-RU') + ' ₽';
+    if (quantityInput) quantityInput.value = item.quantity;
+    
+    // Обновляем общую сумму
+    const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    document.getElementById('cart-count').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById('cart-total').textContent = totalPrice.toLocaleString('ru-RU') + ' ₽';
+    document.getElementById('cart-summary-total').textContent = totalPrice.toLocaleString('ru-RU') + ' ₽';
+}
+
+// Установка точного количества
+function setCartItemQuantity(productId, quantity) {
+    const item = cart.find(item => item.id === productId);
+    if (item) {
+        item.quantity = quantity;
+        if (item.quantity < 1) {
+            removeFromCart(productId);
+        } else {
+            localStorage.setItem('bts_cart', JSON.stringify(cart));
+            updateCartItemDisplay(productId);
+        }
+    }
+}
+
+// Обновленная функция setupCartItemEventListeners
 function setupCartItemEventListeners() {
     // Уменьшение количества
     document.querySelectorAll('.decrease').forEach(btn => {
@@ -212,6 +263,8 @@ function setupCartItemEventListeners() {
         });
     });
 }
+
+
 
 // Добавление товара в корзину
 function addToCart(productId) {
