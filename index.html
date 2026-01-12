@@ -10,6 +10,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💜</text></svg>">
+    <style>
+        /* Временные стили для отладки */
+        .debug {
+            border: 2px solid red;
+            padding: 10px;
+            margin: 10px 0;
+            background: #fff3cd;
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -40,7 +49,118 @@
             <section class="products">
                 <h2>Доступные альбомы</h2>
                 <div class="products-grid" id="products-grid">
-                    <!-- Товары будут загружены через JavaScript -->
+                    <!-- ТОВАРЫ СТАТИЧЕСКИ В HTML -->
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #8338ec20; color: #8338ec">
+                            <span>🎵</span>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">BE (Deluxe Edition)</h3>
+                            <p class="product-description">Альбом 2020 года, отражающий чувства BTS во время пандемии. Включает фотокарточки, постер и журнал.</p>
+                            <div class="product-price">3 499 ₽</div>
+                            <button class="btn-primary add-to-cart" data-id="1" style="background-color: #8338ec">
+                                <i class="fas fa-cart-plus"></i> Добавить в корзину
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #3a86ff20; color: #3a86ff">
+                            <span>🧭</span>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Map of the Soul: 7</h3>
+                            <p class="product-description">Четвертый студийный альбом BTS. Версия 4 включает 2 CD, фотокнигу, фотокарточки и дополнительные материалы.</p>
+                            <div class="product-price">4 299 ₽</div>
+                            <button class="btn-primary add-to-cart" data-id="2" style="background-color: #3a86ff">
+                                <i class="fas fa-cart-plus"></i> Добавить в корзину
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #ff006e20; color: #ff006e">
+                            <span>💖</span>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Love Yourself 結 'Answer'</h3>
+                            <p class="product-description">Компиляционный альбом, завершающий серию Love Yourself. Содержит все синглы трилогии.</p>
+                            <div class="product-price">3 899 ₽</div>
+                            <button class="btn-primary add-to-cart" data-id="3" style="background-color: #ff006e">
+                                <i class="fas fa-cart-plus"></i> Добавить в корзину
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #ffbe0b20; color: #ffbe0b">
+                            <span>💥</span>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Dynamite (Single)</h3>
+                            <p class="product-description">Первая полностью англоязычная песня BTS. Физический сингл включает фото-карточки и постер.</p>
+                            <div class="product-price">1 999 ₽</div>
+                            <button class="btn-primary add-to-cart" data-id="4" style="background-color: #ffbe0b">
+                                <i class="fas fa-cart-plus"></i> Добавить в корзину
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #fb560720; color: #fb5607">
+                            <span>📀</span>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Proof (Anthology)</h3>
+                            <p class="product-description">Антология, охватывающая 9-летнюю карьеру группы. Коллекционное издание с 3 CD.</p>
+                            <div class="product-price">5 999 ₽</div>
+                            <button class="btn-primary add-to-cart" data-id="5" style="background-color: #fb5607">
+                                <i class="fas fa-cart-plus"></i> Добавить в корзину
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #ff006e20; color: #ff006e">
+                            <span>🧈</span>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Butter (Single)</h3>
+                            <p class="product-description">Второй англоязычный сингл BTS. Лимитированное издание с эксклюзивным контентом.</p>
+                            <div class="product-price">2 199 ₽</div>
+                            <button class="btn-primary add-to-cart" data-id="6" style="background-color: #ff006e">
+                                <i class="fas fa-cart-plus"></i> Добавить в корзину
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #06d6a020; color: #06d6a0">
+                            <span>🪽</span>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">Wings (You Never Walk Alone)</h3>
+                            <p class="product-description">Переиздание второго студийного альбома Wings. Включает три новые песни.</p>
+                            <div class="product-price">3 599 ₽</div>
+                            <button class="btn-primary add-to-cart" data-id="7" style="background-color: #06d6a0">
+                                <i class="fas fa-cart-plus"></i> Добавить в корзину
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #118ab220; color: #118ab2">
+                            <span>🌅</span>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">The Most Beautiful Moment in Life: Young Forever</h3>
+                            <p class="product-description">Компиляционный альбом серии The Most Beautiful Moment in Life. Специальное издание.</p>
+                            <div class="product-price">3 199 ₽</div>
+                            <button class="btn-primary add-to-cart" data-id="8" style="background-color: #118ab2">
+                                <i class="fas fa-cart-plus"></i> Добавить в корзину
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -51,7 +171,6 @@
                 </div>
                 
                 <div class="cart-items" id="cart-items">
-                    <!-- Корзина будет загружена через JavaScript -->
                     <p class="empty-cart-message" id="empty-cart-message">Ваша корзина пуста</p>
                 </div>
                 
