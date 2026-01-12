@@ -742,3 +742,14 @@ body {
     border-radius: 10px;
     margin: 20px 0;
 }
+
+.cart-item-price {
+    color: var(--bts-purple);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.cart-item-quantity {
+    font-weight: 700;
+    color: var(--dark-color);
+}
