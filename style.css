@@ -1,10 +1,8 @@
-/* Reset и базовые стили */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 :root {
     --primary-color: #8338ec;
     --primary-dark: #5a27b3;
@@ -20,21 +18,18 @@
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
 }
-
 body {
     font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
     line-height: 1.6;
     color: var(--dark-color);
     background-color: #f5f5f7;
 }
-
 .container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
-
 /* Заголовок */
 .header {
     background: linear-gradient(135deg, var(--bts-purple), var(--primary-color));
@@ -94,7 +89,6 @@ body {
     justify-content: center;
     font-size: 0.9rem;
 }
-
 /* Основное содержание */
 .main {
     padding: 40px 0;
@@ -121,7 +115,6 @@ body {
     max-width: 800px;
     margin: 0 auto;
 }
-
 /* Сетка товаров */
 .products h2 {
     font-size: 1.8rem;
@@ -152,7 +145,6 @@ body {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
-
 /* Контейнер для изображения с фиксированной высотой */
 .product-image {
     height: 250px;
@@ -161,7 +153,6 @@ body {
     overflow: hidden;
     background: linear-gradient(135deg, #7027c3 0%, #8338ec 100%);
 }
-
 /* PNG изображения альбомов */
 .album-cover {
     width: 100%;
@@ -169,7 +160,6 @@ body {
     object-fit: cover;
     transition: transform 0.5s ease;
 }
-
 .product-card:hover .album-cover {
     transform: scale(1.05);
 }
@@ -218,7 +208,6 @@ body {
     color: var(--bts-purple);
     margin-bottom: 15px;
 }
-
 /* Кнопки */
 .btn-primary, .btn-secondary {
     padding: 12px 24px;
@@ -257,7 +246,6 @@ body {
     width: 100%;
     margin-top: auto;
 }
-
 /* Корзина */
 .cart-section {
     background-color: white;
@@ -300,7 +288,6 @@ body {
 .cart-item:last-child {
     border-bottom: none;
 }
-
 /* Изображение в корзине */
 .cart-item-image {
     width: 80px;
@@ -491,7 +478,6 @@ body {
     gap: 15px;
     margin-top: 10px;
 }
-
 /* Подвал */
 .footer {
     background-color: var(--dark-color);
@@ -548,7 +534,6 @@ body {
     font-size: 0.9rem;
     opacity: 0.6;
 }
-
 /* Модальное окно */
 .modal {
     display: none;
@@ -649,7 +634,6 @@ body {
     background-color: var(--light-gray);
     text-align: center;
 }
-
 /* Адаптивность */
 @media (max-width: 768px) {
     .header-content {
